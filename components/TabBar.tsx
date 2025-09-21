@@ -27,14 +27,21 @@ export function MyTabBar({ state, descriptors, navigation }: any) {
     <View style={styles.wrapper}>
       <View style={[styles.tabbar]} onLayout={onTabbarLayout}>
         <Animated.View
-          style={[{
-            position: "absolute",
-            backgroundColor: "#723feb",
-            borderRadius: 30,
-            marginHorizontal: 12,
-            height: buttonWidth - 15,
-            width: buttonWidth - 25,
-          }, animatedStyle]}
+          style={[
+            {
+              // position: "absolute",
+              marginHorizontal: 5,
+              position: "absolute",
+              backgroundColor: "#2792ed",
+              borderRadius: 6,
+              height: 70,
+              width: buttonWidth - 10,
+              left: 0,
+              top: 0,
+              zIndex: -1,
+            },
+            animatedStyle,
+          ]}
         />
         {state.routes.map(
           (
@@ -113,20 +120,21 @@ export function MyTabBar({ state, descriptors, navigation }: any) {
 }
 
 const styles = StyleSheet.create({
-  wrapper: {
-    position: "absolute",
-    bottom: 12,
-    left: 1,
-    right: 1,
-    alignItems: "center",
-  },
+  // wrapper: {
+  //   position: "absolute",
+  //   bottom: 5,
+  //   width: '100%',
+  //   left: 1,
+  //   right: 1,
+  //   alignItems: "center",
+  // },
   activeHighlight: {
     position: "absolute",
     top: -8,
-    width: 60,
+    width: 220,
     height: 60,
-    borderRadius: 30,
-    backgroundColor: "#1976D2",
+    borderRadius: 0,
+    backgroundColor: "#d21919ff",
     elevation: 6,
     shadowColor: "#000",
     shadowOpacity: 0.25,
@@ -134,27 +142,77 @@ const styles = StyleSheet.create({
     shadowOffset: { width: 0, height: 4 },
     zIndex: -1,
   },
+  // wrapper: {
+  //   position: "absolute",
+  //   bottom: 5,
+  //   left: 0,
+  //   right: 0,
+  //   width: "100%",
+  //   alignItems: "center",
+  // },
+  // tabbar: {
+  //   flexDirection: "row",
+  //   width: "100%",
+  //   paddingHorizontal: 30,
+  //   justifyContent: "space-between",
+  //   alignItems: "center",
+  //   backgroundColor: "#4227f1ff",
+  //   borderRadius: 25,
+  //   shadowColor: "#000",
+  //   shadowRadius: 0.1,
+  //   elevation: 5,
+  //   shadowOffset: { width: 10, height: 10 },
+  // },
+  // In tabbar style
   tabbar: {
     position: "absolute",
+    bottom: 1,
+    left: 0,
+    right: 0,
+    width: "100%",
     flexDirection: "row",
     justifyContent: "space-between",
     alignItems: "center",
-    bottom: 1,
-    // marginHorizontal: 10,
-    backgroundColor: "#fff",
-    borderRadius: 15,
+    backgroundColor: "#ceff08ff",
+    borderRadius: 20, // more rounded
     shadowColor: "#000",
-    shadowRadius: 0.1,
-    elevation: 5,
-    shadowOffset: { width: 0, height: 10 },
+    shadowOpacity: 0.25,
+    shadowRadius: 6,
+    shadowOffset: { width: 4, height: 4 },
+    // marginHorizontal: 12,
+    paddingVertical: 8,
+    height: 70,
   },
+  // In wrapper
+  wrapper: {
+    position: "absolute",
+    left: 0,
+    right: 0,
+    bottom: 10,
+    width: "100%",
+    alignItems: "center",
+  },
+  // tabbar: {
+  //   position: "absolute",
+  //   flexDirection: "row",
+  //   // justifyContent: "space-between",
+  //   alignItems: "center",
+  //   bottom: 1,
+  //   width: "100%",
+  //   backgroundColor: "#fff",
+  //   borderRadius: 15,
+  //   shadowColor: "#000",
+  //   shadowRadius: 0.1,
+  //   elevation: 5,
+  //   shadowOffset: { width: 0, height: 10 },
+  // },
   // tabbarItems: {
   //     flex: 1,
   //     justifyContent: 'center',
   //     alignItems: 'center',
   //     gap: 5
   // },
-  // label: {
-  //     marginTop: 5,
-  // }
+  label: {
+    marginTop: 5,
+  },
 });
