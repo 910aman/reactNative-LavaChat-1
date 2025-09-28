@@ -1,6 +1,6 @@
 import { AntDesign, Feather } from "@expo/vector-icons";
 import { router } from "expo-router";
-import { useState } from "react";
+import React, { useState } from "react";
 import {
   Image,
   ScrollView,
@@ -85,6 +85,7 @@ const styles = StyleSheet.create({
     backgroundColor: "#3fc1f3",
     flexGrow: 1,
     alignItems: "center",
+    justifyContent: 'center'
   },
   logoContainer: {
     marginBottom: 40,

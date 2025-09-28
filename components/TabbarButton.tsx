@@ -2,10 +2,10 @@ import { icons } from "@/constants/icons";
 import React, { useEffect } from "react";
 import { Pressable, StyleSheet } from "react-native";
 import Animated, {
-    interpolate,
-    useAnimatedStyle,
-    useSharedValue,
-    withSpring,
+  interpolate,
+  useAnimatedStyle,
+  useSharedValue,
+  withSpring,
 } from "react-native-reanimated";
 type TabRouteName = "index" | "explore" | "friend" | "game" | "profile";
 
@@ -30,6 +30,11 @@ const TabbarButton = ({
   const widthAnim = useSharedValue(defaultWidth);
 
   useEffect(() => {
+    // scale.value = withSpring(
+    //   typeof isFocused === "boolean" ? (isFocused ? 1 : 0) : isFocused,
+    //   { duration: 350 }
+    // );
+
     scale.value = withSpring(isFocused ? 1 : 0, {
       damping: 12,
       stiffness: 120,
@@ -41,7 +46,7 @@ const TabbarButton = ({
         stiffness: 120,
       }
     );
-  }, [isFocused, defaultWidth, scale, widthAnim]);
+  }, [scale, isFocused, widthAnim, defaultWidth]);
 
   const animatedIconStyle = useAnimatedStyle(() => {
     const scaleValue = interpolate(scale.value, [0, 1], [1, 1.6]);
@@ -70,13 +75,13 @@ const TabbarButton = ({
       >
         <Animated.View style={animatedIconStyle}>
           {icons[routeName as TabRouteName]({
-            color: isFocused ? "#000" : "#222",
+            color: isFocused ? "#ffffffff" : "#222",
           })}
         </Animated.View>
         <Animated.Text
           style={[
             {
-              color: isFocused ? "#673ab7" : "#000000ff",
+              color: isFocused ? "#ffffffff" : "#000000ff",
               fontSize: isFocused ? 15 : 12,
             },
             animatedTextStyle,
@@ -92,15 +97,17 @@ const TabbarButton = ({
 export default TabbarButton;
 
 const styles = StyleSheet.create({
-  //   tabbarItems: {
-  //     width: "100%",
-  //     flex: 1,
-  //     justifyContent: "space-between",
-  //     alignItems: "center",
-  //     gap: 5,
-  //     backgroundColor: '#000bbb',
-  //     paddingVertical: 10,
-  //   },
+  // tabbarItems: {
+  //   width: "100%",
+  //   height: 70,
+  //   flex: 1,
+  //   zIndex: 4,
+  //   justifyContent: "space-between",
+  //   alignItems: "center",
+  //   gap: 5,
+  //   backgroundColor: '#b53d3dff',
+  //   paddingVertical: 10,
+  // },
   //   animatedBtn: {
   //     justifyContent: "center",
   //     alignItems: "center",
@@ -115,10 +122,10 @@ const styles = StyleSheet.create({
   animatedBtn: {
     flex: 1,
     borderRadius: 0,
-    overflow: "hidden",
-    backgroundColor:  "transparent", // highlight for active
-    elevation: 4 ,
-    shadowColor: "#ffff",
+    backgroundColor: "transparent",
+    justifyContent: "center",
+    alignItems: "center",
+    // shadowColor: "#ff2020ff",
   },
   label: {
     marginTop: 5,

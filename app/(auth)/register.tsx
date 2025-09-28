@@ -1,7 +1,7 @@
 import { Feather } from "@expo/vector-icons";
 import AntDesign from '@expo/vector-icons/AntDesign';
 import { router } from "expo-router";
-import { useState } from "react";
+import React, { useState } from "react";
 import {
   ScrollView,
   StyleSheet,
@@ -19,86 +19,90 @@ export default function Register({ navigation }: any) {
 
   return (
     <ScrollView contentContainerStyle={styles.container}>
-      <TouchableOpacity onPress={() => navigation.goBack()} style={styles.backText}>
+      <TouchableOpacity
+        onPress={() => router.back()}
+        style={styles.backText}
+      >
         <Text style={styles.backText}>&lt; Back</Text>
       </TouchableOpacity>
+      <View style={styles.mainContainer}>
+        <Text style={styles.signUpTitle}>SIGN UP</Text>
 
-      <Text style={styles.signUpTitle}>SIGN UP</Text>
+        <View style={styles.inputGroup}>
+          <View style={styles.inputWrapper}>
+            <Feather name="user" size={20} color="#333" style={styles.icon} />
+            <TextInput
+              placeholder="Name"
+              value={name}
+              onChangeText={setName}
+              style={styles.input}
+              placeholderTextColor="#666"
+            />
+          </View>
 
-      <View style={styles.inputGroup}>
-        <View style={styles.inputWrapper}>
-          <Feather name="user" size={20} color="#333" style={styles.icon} />
-          <TextInput
-            placeholder="Name"
-            value={name}
-            onChangeText={setName}
-            style={styles.input}
-            placeholderTextColor="#666"
-          />
+          <View style={styles.inputWrapper}>
+            <Feather name="mail" size={20} color="#333" style={styles.icon} />
+            <TextInput
+              placeholder="Email"
+              value={email}
+              onChangeText={setEmail}
+              style={styles.input}
+              keyboardType="email-address"
+              placeholderTextColor="#666"
+            />
+          </View>
+
+          <View style={styles.inputWrapper}>
+            <Feather name="key" size={20} color="#333" style={styles.icon} />
+            <TextInput
+              placeholder="Password"
+              value={password}
+              onChangeText={setPassword}
+              style={styles.input}
+              secureTextEntry
+              placeholderTextColor="#666"
+            />
+          </View>
+
+          <View style={styles.inputWrapper}>
+            <Feather name="home" size={20} color="#333" style={styles.icon} />
+            <TextInput
+              placeholder="Country"
+              value={country}
+              onChangeText={setCountry}
+              style={styles.input}
+              placeholderTextColor="#666"
+            />
+            {/* You can replace the dropdown icon below with a custom dropdown component */}
+            <Feather
+              name="chevron-down"
+              size={20}
+              color="#333"
+              style={{ marginLeft: 5 }}
+            />
+          </View>
         </View>
 
-        <View style={styles.inputWrapper}>
-          <Feather name="mail" size={20} color="#333" style={styles.icon} />
-          <TextInput
-            placeholder="Email"
-            value={email}
-            onChangeText={setEmail}
-            style={styles.input}
-            keyboardType="email-address"
-            placeholderTextColor="#666"
-          />
-        </View>
+        <TouchableOpacity style={styles.loginButton}>
+          <Text style={styles.loginButtonText}>SIGN UP</Text>
+        </TouchableOpacity>
 
-        <View style={styles.inputWrapper}>
-          <Feather name="key" size={20} color="#333" style={styles.icon} />
-          <TextInput
-            placeholder="Password"
-            value={password}
-            onChangeText={setPassword}
-            style={styles.input}
-            secureTextEntry
-            placeholderTextColor="#666"
-          />
-        </View>
+        <TouchableOpacity style={styles.googleButton}>
+          <AntDesign name="google" size={18} color="white" />
+          <Text style={styles.googleButtonText}>Sign up with Google</Text>
+        </TouchableOpacity>
 
-        <View style={styles.inputWrapper}>
-          <Feather name="home" size={20} color="#333" style={styles.icon} />
-          <TextInput
-            placeholder="Country"
-            value={country}
-            onChangeText={setCountry}
-            style={styles.input}
-            placeholderTextColor="#666"
-          />
-          {/* You can replace the dropdown icon below with a custom dropdown component */}
-          <Feather
-            name="chevron-down"
-            size={20}
-            color="#333"
-            style={{ marginLeft: 5 }}
-          />
-        </View>
+        <TouchableOpacity style={styles.facebookButton}>
+          <Feather name="facebook" size={18} color="white" />
+          <Text style={styles.facebookButtonText}>Sign up with facebook</Text>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={() => router.back()}>
+          <Text style={styles.bottomText}>
+            Already have account? <Text style={styles.linkText}>Log in</Text>
+          </Text>
+        </TouchableOpacity>
       </View>
-
-      <TouchableOpacity style={styles.loginButton}>
-        <Text style={styles.loginButtonText}>SIGN UP</Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity style={styles.googleButton}>
-        <AntDesign name="google" size={18} color="white" />
-        <Text style={styles.googleButtonText}>Sign up with Google</Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity style={styles.facebookButton}>
-        <Feather name="facebook" size={18} color="white" />
-        <Text style={styles.facebookButtonText}>Sign up with facebook</Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity onPress={() => router.back()}>
-        <Text style={styles.bottomText}>
-          Already have account? <Text style={styles.linkText}>Log in</Text>
-        </Text>
-      </TouchableOpacity>
     </ScrollView>
   );
 }
@@ -109,7 +113,10 @@ const styles = StyleSheet.create({
     paddingHorizontal: 30,
     backgroundColor: "#3fc1f3",
     flexGrow: 1,
+  },
+  mainContainer: {
     alignItems: "center",
+    justifyContent: "center",
   },
   logoContainer: {
     marginBottom: 40,
@@ -212,8 +219,8 @@ const styles = StyleSheet.create({
   },
   backText: {
     // alignSelf: "flex-start",
-    width: '100%',
-    alignItems: 'flex-start',
+    width: "100%",
+    alignItems: "flex-start",
     // justifyContent: 'flex-start
     color: "#fff",
     fontWeight: "bold",

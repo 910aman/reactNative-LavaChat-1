@@ -1,12 +1,14 @@
-import { useState } from "react";
+import React, { useEffect, useState } from "react";
 import { LayoutChangeEvent, StyleSheet, View } from "react-native";
 import Animated, {
+  interpolateColor,
   useAnimatedStyle,
   useSharedValue,
+  withSpring,
 } from "react-native-reanimated";
 import TabbarButton from "./TabbarButton";
 
-export function MyTabBar({ state, descriptors, navigation }: any) {
+export const MyTabBar = ({ state, descriptors, navigation }: any) => {
   const [dimensions, setDimensions] = useState({ height: 20, width: 100 });
   const buttonWidth = dimensions.width / state.routes.length;
   const onTabbarLayout = (e: LayoutChangeEvent) => {
@@ -17,7 +19,32 @@ export function MyTabBar({ state, descriptors, navigation }: any) {
   };
 
   const tabPositionX = useSharedValue(0);
+  const highlightColor = useSharedValue(0);
+
+  useEffect(() => {
+  // move highlight to current tab
+  tabPositionX.value = withSpring(buttonWidth * state.index, {
+    damping: 15,
+    stiffness: 120,
+  });
+
+  // animate background color when focus changes
+  highlightColor.value = withSpring(1, { damping: 15, stiffness: 120 });
+
+  const timeout = setTimeout(() => {
+    highlightColor.value = withSpring(0, { damping: 15, stiffness: 120 });
+  }, 400);
+
+    return () => clearTimeout(timeout);
+}, [buttonWidth, highlightColor, state.index, tabPositionX]);
+
   const animatedStyle = useAnimatedStyle(() => {
+    const bgColor = interpolateColor(
+      highlightColor.value,
+      [0, 1],
+      ["transparent", "#1376ceff"] // unfocused → focused
+    );
+
     return {
       transform: [{ translateX: tabPositionX.value }],
     };
@@ -29,16 +56,12 @@ export function MyTabBar({ state, descriptors, navigation }: any) {
         <Animated.View
           style={[
             {
-              // position: "absolute",
               marginHorizontal: 5,
               position: "absolute",
-              backgroundColor: "#2792ed",
+              backgroundColor: "#1376ceff",
               borderRadius: 6,
-              height: 70,
               width: buttonWidth - 10,
-              left: 0,
-              top: 0,
-              zIndex: -1,
+              height: buttonWidth - 5,
             },
             animatedStyle,
           ]}
@@ -120,21 +143,20 @@ export function MyTabBar({ state, descriptors, navigation }: any) {
 }
 
 const styles = StyleSheet.create({
-  // wrapper: {
-  //   position: "absolute",
-  //   bottom: 5,
-  //   width: '100%',
-  //   left: 1,
-  //   right: 1,
-  //   alignItems: "center",
-  // },
+  wrapper: {
+    position: "absolute",
+    bottom: 5,
+    left: 0,
+    right: 0,
+    alignItems: "center",
+  },
   activeHighlight: {
     position: "absolute",
     top: -8,
-    width: 220,
+    // width: 220,
     height: 60,
-    borderRadius: 0,
-    backgroundColor: "#d21919ff",
+    borderRadius: 5,
+    backgroundColor: "#1976D2",
     elevation: 6,
     shadowColor: "#000",
     shadowOpacity: 0.25,
@@ -164,54 +186,45 @@ const styles = StyleSheet.create({
   //   shadowOffset: { width: 10, height: 10 },
   // },
   // In tabbar style
-  tabbar: {
-    position: "absolute",
-    bottom: 1,
-    left: 0,
-    right: 0,
-    width: "100%",
-    flexDirection: "row",
-    justifyContent: "space-between",
-    alignItems: "center",
-    backgroundColor: "#ceff08ff",
-    borderRadius: 20, // more rounded
-    shadowColor: "#000",
-    shadowOpacity: 0.25,
-    shadowRadius: 6,
-    shadowOffset: { width: 4, height: 4 },
-    // marginHorizontal: 12,
-    paddingVertical: 8,
-    height: 70,
-  },
-  // In wrapper
-  wrapper: {
-    position: "absolute",
-    left: 0,
-    right: 0,
-    bottom: 10,
-    width: "100%",
-    alignItems: "center",
-  },
   // tabbar: {
   //   position: "absolute",
-  //   flexDirection: "row",
-  //   // justifyContent: "space-between",
-  //   alignItems: "center",
-  //   bottom: 1,
+  //   bottom: 0,
+  //   // left: 0,
+  //   // right: 0,
   //   width: "100%",
-  //   backgroundColor: "#fff",
-  //   borderRadius: 15,
+  //   flexDirection: "row",
+  //   justifyContent: "space-between",
+  //   alignItems: "center",
+  //   backgroundColor: "#ceff08ff",
+  //   borderRadius: 10,
   //   shadowColor: "#000",
-  //   shadowRadius: 0.1,
-  //   elevation: 5,
-  //   shadowOffset: { width: 0, height: 10 },
+  //   shadowOpacity: 0.25,
+  //   shadowRadius: 6,
+  //   shadowOffset: { width: 4, height: 4 },
+  //   paddingVertical: 0,
+  //   paddingHorizontal: -20,
+  //   height: 70,
   // },
-  // tabbarItems: {
-  //     flex: 1,
-  //     justifyContent: 'center',
-  //     alignItems: 'center',
-  //     gap: 5
-  // },
+  tabbar: {
+    position: "absolute",
+    flexDirection: "row",
+    // justifyContent: "space-between",
+    alignItems: "center",
+    bottom: 1,
+    width: "100%",
+    backgroundColor: "#d5ef0eff",
+    borderRadius: 5,
+    shadowColor: "#000",
+    shadowRadius: 0.1,
+    elevation: 5,
+    shadowOffset: { width: 0, height: 10 },
+  },
+  tabbarItems: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center",
+    gap: 5,
+  },
   label: {
     marginTop: 5,
   },
