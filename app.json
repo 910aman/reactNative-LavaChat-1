@@ -1,7 +1,7 @@
 {
   "expo": {
-    "name": "BugFreeApp",
-    "slug": "BugFreeApp",
+    "name": "Lava Chat",
+    "slug": "Lava Chat",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",

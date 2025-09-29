@@ -50,7 +50,7 @@ export default function Login({ navigation }: any) {
           />
         </View>
 
-        <TouchableOpacity>
+        <TouchableOpacity onPress={() => router.push("/(auth)/forgot")}>
           <Text style={styles.forgotPassword}>Forgot Password?</Text>
         </TouchableOpacity>
       </View>
@@ -67,12 +67,6 @@ export default function Login({ navigation }: any) {
       <TouchableOpacity style={styles.facebookButton}>
         <Feather name="facebook" size={18} color="white" />
         <Text style={styles.facebookButtonText}>Login with facebook</Text>
-      </TouchableOpacity>
-
-      <TouchableOpacity onPress={() => router.push("/(auth)/register")}>
-        <Text style={styles.bottomText}>
-          Don&nbsp;t have account? <Text style={styles.linkText}>Sign up</Text>
-        </Text>
       </TouchableOpacity>
     </ScrollView>
   );
@@ -132,7 +126,7 @@ const styles = StyleSheet.create({
     color: "white",
     fontWeight: "bold",
     textAlign: "right",
-    marginTop: 5,
+    // marginTop: 5,
   },
   loginButton: {
     backgroundColor: "#f9c80e",
@@ -168,7 +162,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
   },
   facebookButton: {
-    backgroundColor: "#705ec8",
+    backgroundColor: "#1877F2",
     borderRadius: 25,
     flexDirection: "row",
     paddingVertical: 12,
