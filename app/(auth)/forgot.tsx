@@ -1,13 +1,14 @@
+import { LeftArrowIcon } from "@/constants/icons";
 import { Feather } from "@expo/vector-icons";
 import { router } from "expo-router";
 import React, { useState } from "react";
 import {
+  Alert,
   StyleSheet,
   Text,
   TextInput,
   TouchableOpacity,
   View,
-  Alert,
 } from "react-native";
 
 export default function ForgotPassword() {
@@ -37,7 +38,15 @@ export default function ForgotPassword() {
 
   return (
     <View style={styles.container}>
-      <Text style={styles.title}>Forgot Password</Text>
+      <TouchableOpacity
+        onPress={() => router.push("/(auth)/login")}
+        style={{ display: "flex", flexDirection: "row", alignItems: "center" }}
+      >
+        <View style={{ marginLeft: 30 }}>
+          <LeftArrowIcon />
+        </View>
+        <Text style={styles.title}>Forgot Password</Text>
+      </TouchableOpacity>
 
       <View style={styles.innerContainer}>
         {/* Email Input */}
@@ -81,12 +90,9 @@ export default function ForgotPassword() {
           >
             <Text style={styles.validateButtonText}>Validate</Text>
           </TouchableOpacity>
-          <TouchableOpacity
-            style={styles.backToLoginStyle}
-            onPress={() => router.push("/(auth)/login")}
-          >
+          {/* <TouchableOpacity style={styles.backToLoginStyle}>
             <Text style={styles.backToLogin}>back to Login!</Text>
-          </TouchableOpacity>
+          </TouchableOpacity> */}
         </>
         {/* )} */}
       </View>
@@ -110,11 +116,15 @@ const styles = StyleSheet.create({
     paddingHorizontal: 30,
   },
   title: {
+    marginLeft: 10,
+    flex: 1,
+    height: "100%",
     color: "white",
     fontWeight: "bold",
-    textAlign: 'center',
+    justifyContent: "center",
+    alignItems: "center",
+    // textAlign: "center",
     fontSize: 24,
-    marginBottom: 30,
   },
   inputWrapper: {
     backgroundColor: "white",

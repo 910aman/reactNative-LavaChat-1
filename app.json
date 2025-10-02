@@ -1,7 +1,7 @@
 {
   "expo": {
     "name": "Lava Chat",
-    "slug": "Lava Chat",
+    "slug": "lava-chat",
     "version": "1.0.0",
     "orientation": "portrait",
     "icon": "./assets/images/icon.png",
@@ -48,8 +48,9 @@
     "extra": {
       "router": {},
       "eas": {
-        "projectId": "067e1f30-466c-4294-a9f0-25827854fad5"
+        "projectId": "2aab158b-9bad-4667-b39b-e1390a1f3b2e"
       }
-    }
+    },
+    "owner": "aman9426"
   }
 }
