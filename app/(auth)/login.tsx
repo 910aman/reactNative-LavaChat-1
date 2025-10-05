@@ -6,7 +6,6 @@ import {
 } from "@/constants/icons";
 import { Feather } from "@expo/vector-icons";
 import { router } from "expo-router";
-import * as WebBrowser from "expo-web-browser";
 import React, { useState } from "react";
 import {
   Image,
@@ -25,8 +24,8 @@ const Login = () => {
   const [password, setPassword] = useState("");
 
   const handleTermService = async () => {
-    const url = "https://www.google.com";
-    await WebBrowser.openBrowserAsync(url);
+    // const url = "https://www.google.com";
+    // await WebBrowser.openBrowserAsync(url);
   };
   const handlePrivacyPolicy = async () => {
     // const url = "https://www.google.com";
